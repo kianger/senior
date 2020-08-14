@@ -4,19 +4,41 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Auth;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class UsersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth', [
+            'except' => ['show', 'create', 'store']
+        ]);
+        $this->middleware('guest', [
+            'only' => ['create']
+        ]);
+
+    }
+
     public function create()
     {
         return view('users.create');
     }
 
+    /**
+     * @param User $user
+     * @return Application|Factory|View
+     * @throws AuthorizationException
+     */
     public function show(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.show', compact('user'));
     }
 
@@ -44,8 +66,15 @@ class UsersController extends Controller
         return redirect()->route('users.show', [$user]);
     }
 
+    /**
+     * @param User $user
+     * @return Application|Factory|View
+     * @throws AuthorizationException
+     */
     public function edit(User $user)
     {
+        // 注册用户更新策略
+        $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
 
