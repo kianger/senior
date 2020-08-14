@@ -122,11 +122,12 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/static_pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/layouts" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/layouts" />
       <recent name="$PROJECT_DIR$/resources/views/static_pages" />
     </key>
   </component>
@@ -144,7 +145,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1597373241241</updated>
-      <workItem from="1597373242274" duration="5274000" />
+      <workItem from="1597373242274" duration="5724000" />
     </task>
     <servers />
   </component>
@@ -172,9 +173,9 @@
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
     <state width="1876" height="279" key="GridCell.Tab.0.right/0.28.1920.1052@0.28.1920.1052" timestamp="1597373310284" />
-    <state x="794" y="477" width="311" height="150" key="NewPhpFileDialog" timestamp="1597375827877">
+    <state x="794" y="477" width="301" height="150" key="NewPhpFileDialog" timestamp="1597378748351">
       <screen x="0" y="28" width="1920" height="1052" />
     </state>
-    <state x="794" y="477" width="311" height="150" key="NewPhpFileDialog/0.28.1920.1052@0.28.1920.1052" timestamp="1597375827877" />
+    <state x="794" y="477" width="301" height="150" key="NewPhpFileDialog/0.28.1920.1052@0.28.1920.1052" timestamp="1597378748351" />
   </component>
 </project>
