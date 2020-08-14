@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Eloquent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -11,8 +11,9 @@ use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
 
+
 /**
- * App\User
+ * App\Models\User
  *
  * @property int $id
  * @property string $name
@@ -40,6 +41,8 @@ use Illuminate\Support\Carbon;
 class User extends Authenticatable
 {
     use Notifiable;
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
