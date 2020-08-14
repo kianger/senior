@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
 
 class SessionsController extends Controller
@@ -33,5 +35,15 @@ class SessionsController extends Controller
             session()->flash('danger', '很抱歉，您的邮箱和密码不匹配');
             return redirect()->back()->withInput();
         }
+    }
+
+    /**
+     * @return Application|RedirectResponse|Redirector
+     */
+    public function destroy()
+    {
+        Auth::logout();
+        session()->flash('success', '您已成功退出！');
+        return redirect('login');
     }
 }
