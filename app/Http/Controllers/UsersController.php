@@ -7,6 +7,9 @@ use Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Contracts\View\Factory;
+use \Illuminate\View\View;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class UsersController extends Controller
 {
@@ -20,11 +23,27 @@ class UsersController extends Controller
         ]);
     }
 
+    /**
+     * @return Factory|View
+     */
+    public function index()
+    {
+        $users = User::paginate(10);
+        return view('users.index', compact('users'));
+    }
+
+    /**
+     * @return Factory|View
+     */
     public function create()
     {
         return view('users.create');
     }
 
+    /**
+     * @param User $user
+     * @return Factory|View
+     */
     public function show(User $user)
     {
         return view('users.show', compact('user'));
@@ -56,8 +75,8 @@ class UsersController extends Controller
 
     /**
      * @param User $user
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @return Factory|View
+     * @throws AuthorizationException
      */
     public function edit(User $user)
     {
@@ -70,7 +89,7 @@ class UsersController extends Controller
      * @param Request $request
      * @return RedirectResponse
      * @throws ValidationException
-     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws AuthorizationException
      */
     public function update(User $user, Request $request)
     {
