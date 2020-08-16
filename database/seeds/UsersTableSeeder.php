@@ -12,11 +12,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 50)->create();
+        factory(User::class)->times(20)->create();
 
-        // $user = User::find(1);
-        // $user->name = 'wheater';
-        // $user->email = 'wheat_yuan@163.com';
-        // $user->save();
+        $user = User::find(1);
+        $user->name = 'wheater';
+        $user->email = 'wheat_yuan@163.com';
+        $user->is_admin = true;
+        $user->save();
     }
 }

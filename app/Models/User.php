@@ -37,6 +37,8 @@ use Illuminate\Support\Carbon;
  * @method static Builder|User whereRememberToken($value)
  * @method static Builder|User whereUpdatedAt($value)
  * @mixin Eloquent
+ * @property int $is_admin
+ * @method static Builder|User whereIsAdmin($value)
  */
 class User extends Authenticatable
 {
