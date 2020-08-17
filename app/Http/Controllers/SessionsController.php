@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class SessionsController extends Controller
 {
@@ -18,6 +20,9 @@ class SessionsController extends Controller
         ]);
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function create()
     {
         return view('sessions.create');
