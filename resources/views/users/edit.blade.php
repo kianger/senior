@@ -18,6 +18,7 @@
                 </div>
 
                 <form method="POST" action="{{ route('users.update', $user->id )}}">
+                    {{--在 RESTful 架构中，我们使用 PATCH 动作来更新资源，但由于浏览器不支持发送 PATCH 动作，因此我们需要在表单中添加一个隐藏域来伪造 PATCH 请求。--}}
                     {{ method_field('PATCH') }}
                     {{ csrf_field() }}
 

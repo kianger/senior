@@ -3,6 +3,7 @@
     <a href="{{ route('users.show', $user) }}">
         {{ $user->name }}
     </a>
+
     @can('destroy', $user)
         <form action="{{ route('users.destroy', $user->id) }}" method="post" class="float-right">
             {{ csrf_field() }}

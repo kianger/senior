@@ -4,15 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Auth;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Contracts\View\Factory;
 use \Illuminate\View\View;
-use Illuminate\Auth\Access\AuthorizationException;
 
 class UsersController extends Controller
 {
+    /**
+     * UsersController constructor.
+     */
     public function __construct()
     {
         $this->middleware('auth', [
@@ -24,7 +29,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @return Factory|View
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -33,7 +38,7 @@ class UsersController extends Controller
     }
 
     /**
-     * @return Factory|View
+     * @return Application|Factory|View
      */
     public function create()
     {
@@ -42,10 +47,12 @@ class UsersController extends Controller
 
     /**
      * @param User $user
-     * @return Factory|View
+     * @return Application|Factory|View
+     * @throws AuthorizationException
      */
     public function show(User $user)
     {
+        $this->authorize('update', $user);
         return view('users.show', compact('user'));
     }
 
@@ -75,11 +82,12 @@ class UsersController extends Controller
 
     /**
      * @param User $user
-     * @return Factory|View
+     * @return Application|Factory|View
      * @throws AuthorizationException
      */
     public function edit(User $user)
     {
+        // 注册用户更新策略
         $this->authorize('update', $user);
         return view('users.edit', compact('user'));
     }
@@ -114,7 +122,7 @@ class UsersController extends Controller
     /**
      * @param User $user
      * @return RedirectResponse
-     * @throws \Exception
+     * @throws Exception
      */
     public function destroy(User $user)
     {
