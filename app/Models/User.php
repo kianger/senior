@@ -10,6 +10,7 @@ use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 
 
 /**
@@ -39,6 +40,10 @@ use Illuminate\Support\Carbon;
  * @mixin Eloquent
  * @property int $is_admin
  * @method static Builder|User whereIsAdmin($value)
+ * @property string|null $activation_token
+ * @property int $activated
+ * @method static Builder|User whereActivated($value)
+ * @method static Builder|User whereActivationToken($value)
  */
 class User extends Authenticatable
 {
@@ -64,6 +69,15 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user) {
+            $user->activation_token = Str::random(10);
+        });
+    }
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -82,4 +96,5 @@ class User extends Authenticatable
         $hash = md5(strtolower(trim($this->attributes['email'])));
         return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
+
 }
