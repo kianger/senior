@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,6 +47,12 @@ use Illuminate\Support\Str;
  * @property int $activated
  * @method static Builder|User whereActivated($value)
  * @method static Builder|User whereActivationToken($value)
+ * @property-read Collection|User[] $followers
+ * @property-read int|null $followers_count
+ * @property-read Collection|User[] $followings
+ * @property-read int|null $followings_count
+ * @property-read Collection|Status[] $statuses
+ * @property-read int|null $statuses_count
  */
 class User extends Authenticatable
 {
@@ -116,7 +123,10 @@ class User extends Authenticatable
      */
     public function feed()
     {
-        return $this->statuses()
+        $user_ids = $this->followings->pluck('id')->toArray();
+        array_push($user_ids, $this->id);
+        return Status::whereIn('user_id', $user_ids)
+            ->with('user')
             ->orderBy('created_at', 'desc');
     }
 
