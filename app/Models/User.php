@@ -5,6 +5,7 @@ namespace App\Models;
 use Eloquent;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Notifications\DatabaseNotificationCollection;
@@ -97,9 +98,25 @@ class User extends Authenticatable
         return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
 
+    /**
+     * # 用户-微博一vs多关系
+     * @return HasMany
+     */
     public function statuses()
     {
         return $this->hasMany(Status::class);
+    }
+
+    /**
+     * 当前用户发布过的所有微博从数据库中取出，
+     * 并根据创建时间来倒序排序
+     *
+     * @return HasMany
+     */
+    public function feed()
+    {
+        return $this->statuses()
+            ->orderBy('created_at', 'desc');
     }
 
 }
