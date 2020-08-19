@@ -10,21 +10,20 @@ class ResetPasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Password Reset Controller
+    | 重置密码控制器
     |--------------------------------------------------------------------------
     |
-    | This controller is responsible for handling password reset requests
-    | and uses a simple trait to include this behavior. You're free to
-    | explore this trait and override any methods you wish to tweak.
+    | 此控制器使用 ResetsPasswords trait 里设定的控制器方法来处理
+    | 显示密码重置表单和修改密码动作。
     |
     */
 
     use ResetsPasswords;
 
     /**
-     * Where to redirect users after resetting their password.
+     * 重置密码表单提交成功的重定向页面
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 }

@@ -142,7 +142,7 @@ class UsersController extends Controller
     {
         $view = 'emails.confirm';
         $data = compact('user');
-        $from = 'wheater@example.com';
+        $from = '375890221@qq.com';
         $name = 'Wheat';
         $to = $user->email;
         $subject = "感谢注册 Weibo 应用！请确认你的邮箱。";

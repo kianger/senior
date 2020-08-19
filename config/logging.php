@@ -37,6 +37,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
+            'tap' => [Freshbitsweb\LaravelLogEnhancer\LogEnhancer::class],
             'channels' => ['single'],
             'ignore_exceptions' => false,
         ],
